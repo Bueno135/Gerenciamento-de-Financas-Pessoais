@@ -66,13 +66,4 @@ O projeto é organizado em quatro arquivos principais:
 2. **Gerar Relatório**:
    - Clique no botão "Gerar Relatório" para visualizar um gráfico de pizza mostrando a distribuição dos gastos por categoria.
 
-## Considerações Finais
 
-Este aplicativo é um ponto de partida para o gerenciamento de finanças pessoais. Ele pode ser expandido com funcionalidades adicionais, como:
-
-- **Edição e exclusão de transações**.
-- **Planejamento de orçamento** com alertas.
-- **Exportação de relatórios** em formato PDF ou Excel.
-- **Sincronização com serviços bancários** para importação automática de transações.
-
-Sinta-se à vontade para contribuir e melhorar o projeto!
