@@ -4,6 +4,7 @@ def create_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
+        print("Conexão com o banco de dados estabelecida.")  # Debug
         return conn
     except sqlite3.Error as e:
         print(e)
@@ -22,6 +23,7 @@ def create_table(conn):
             )
         ''')
         conn.commit()
+        print("Tabela 'transactions' criada com sucesso.")  # Debug
     except sqlite3.Error as e:
         print(e)
 
@@ -43,4 +45,4 @@ if __name__ == "__main__":
     if conn is not None:
         create_table(conn)
     else:
-        print("Error! Cannot create the database connection.")
+        print("Erro! Não foi possível estabelecer a conexão com o banco de dados.")
