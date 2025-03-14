@@ -20,6 +20,19 @@ def generate_report(transactions):
     plt.show()
 
 def export_to_excel(transactions, filename="relatorio_financeiro.xlsx"):
-    df = pd.DataFrame(transactions, columns=["ID", "Tipo", "Categoria", "Valor", "Data"])
-    df.to_excel(filename, index=False)
-    print(f"Relatório exportado para {filename}")
+    try:
+        # Verifica se há transações para exportar
+        if not transactions:
+            print("Nenhuma transação encontrada para exportar.")
+            return False
+
+        # Cria um DataFrame a partir da lista de transações
+        df = pd.DataFrame(transactions, columns=["ID", "Tipo", "Categoria", "Valor", "Data"])
+        
+        # Exporta o DataFrame para um arquivo Excel
+        df.to_excel(filename, index=False)
+        print(f"Relatório exportado para {filename}")
+        return True
+    except Exception as e:
+        print(f"Erro ao exportar para Excel: {e}")
+        return False

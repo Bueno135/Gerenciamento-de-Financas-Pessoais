@@ -1,16 +1,19 @@
 import sqlite3
+import os
 
 def create_connection(db_file):
+    """Cria uma conexão com o banco de dados SQLite."""
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print("Conexão com o banco de dados estabelecida.")  # Debug
+        print(f"Conexão com o banco de dados '{db_file}' estabelecida.")  # Debug
         return conn
     except sqlite3.Error as e:
-        print(e)
+        print(f"Erro ao conectar ao banco de dados: {e}")
     return conn
 
 def create_table(conn):
+    """Cria a tabela 'transactions' se ela não existir."""
     try:
         cursor = conn.cursor()
         cursor.execute('''
@@ -25,9 +28,10 @@ def create_table(conn):
         conn.commit()
         print("Tabela 'transactions' criada com sucesso.")  # Debug
     except sqlite3.Error as e:
-        print(e)
+        print(f"Erro ao criar tabela: {e}")
 
 def insert_transaction(conn, transaction):
+    """Insere uma nova transação na tabela 'transactions'."""
     sql = '''INSERT INTO transactions(type, category, amount, date)
              VALUES(?,?,?,?)'''
     cursor = conn.cursor()
@@ -36,12 +40,15 @@ def insert_transaction(conn, transaction):
     return cursor.lastrowid
 
 def fetch_transactions(conn):
+    """Busca todas as transações da tabela 'transactions'."""
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM transactions")
     return cursor.fetchall()
 
 if __name__ == "__main__":
-    conn = create_connection("finance.db")
+    # Cria o banco de dados e a tabela se não existirem
+    db_file = "finance.db"
+    conn = create_connection(db_file)
     if conn is not None:
         create_table(conn)
     else:
